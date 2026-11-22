@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Word Parts – medical terminology made easy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#eef5f3;--ink:#10302f;--mut:#58706d;--card:#fff;--line:#cfe0dc;--p:#2563eb;--r:#0b8f63;--s:#8b3fd0;--ok:#0b8f63;--bad:#d9433b}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1f1f;--ink:#e6f2ef;--mut:#93aaa6;--card:#152b2b;--line:#27423f;--p:#7aa5ff;--r:#3fd1a0;--s:#c795ff;--ok:#3fd1a0;--bad:#ff7a70}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.5;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+main{max-width:760px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:clamp(2.6rem,12vw,4.4rem);font-weight:800;margin:.2em 0 0;letter-spacing:-.03em;line-height:1}
+h1 span{display:inline-block;animation:snap 1.1s cubic-bezier(.2,.9,.3,1.15) both}
+h1 .a{color:var(--p);--d:-70px}h1 .b{color:var(--r);--d:0px;animation-delay:.1s}h1 .c{color:var(--s);--d:70px;animation-delay:.2s}
+@keyframes snap{from{transform:translateX(var(--d)) scale(.7);opacity:0;letter-spacing:.3em}to{transform:none;opacity:1}}
+.sub{color:var(--mut);margin:.6em 0 1.2em;max-width:34em}
+nav{display:flex;gap:6px;background:var(--card);border:1.5px solid var(--line);border-radius:999px;padding:4px;margin-bottom:20px;position:sticky;top:8px;z-index:5}
+nav button{flex:1}
+button{font:inherit;color:inherit;cursor:pointer}
+nav button,.pill{border:0;background:none;padding:9px 14px;border-radius:999px;font-weight:600}
+nav button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+:focus-visible{outline:3px solid var(--p);outline-offset:2px}
+.slots{display:grid;gap:10px}
+@media(min-width:560px){.slots{grid-template-columns:repeat(3,1fr)}}
+.slot{background:var(--card);border:1.5px solid var(--line);border-top:6px solid var(--c);border-radius:12px;padding:10px 12px}
+.slot label{font-weight:600;font-size:.9rem;color:var(--c)}
+select{width:100%;font:inherit;margin-top:4px;padding:8px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.P{--c:var(--p)}.R{--c:var(--r)}.S{--c:var(--s)}
+.out{margin:22px 0 8px;font-size:clamp(2.2rem,11vw,3.8rem);font-weight:800;letter-spacing:-.02em;word-break:break-word;min-height:1.2em}
+.out i{font-style:normal;display:inline-block;animation:pop .45s cubic-bezier(.3,1.6,.5,1) both}
+.out .P{color:var(--p)}.out .R{color:var(--r)}.out .S{color:var(--s)}
+@keyframes pop{from{transform:translateY(.4em) scale(.6);opacity:0}}
+.legend{display:grid;gap:6px;margin:0 0 18px}
+.legend div{border-left:6px solid var(--c);padding:4px 10px;background:var(--card);border-radius:0 10px 10px 0}
+.legend b{color:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip,.pill{border:1.5px solid var(--line);background:var(--card);padding:7px 13px;border-radius:999px}
+.chip:hover,.pill:hover{border-color:var(--ink)}
+.pill[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+h2{font-size:1rem;margin:22px 0 8px;color:var(--mut);font-weight:600}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+input[type=search]{flex:1 1 180px;font:inherit;padding:9px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.prog{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin:4px 0 6px}
+.prog i{display:block;height:100%;width:0;background:var(--ok);transition:width .5s}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.card{perspective:800px;height:340px;cursor:pointer}
+.in{position:relative;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.card.f .in{transform:rotateY(180deg)}
+.fa,.fb{position:absolute;inset:0;backface-visibility:hidden;border-radius:12px;padding:10px 12px;background:var(--card);border:1.5px solid var(--line);border-left:6px solid var(--c);overflow:auto}
+.fb{transform:rotateY(180deg)}
+.fa b{font-size:1.5rem;color:var(--c);word-break:break-word}
+.fb small{display:block;color:var(--mut);margin-top:4px}
+.star{position:absolute;top:4px;right:6px;border:0;background:none;font-size:1.3rem;color:var(--mut);z-index:2}
+.star[aria-pressed=true]{color:#e8a600}
+.q{background:var(--card);border:1.5px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:16px}
+.q .big{font-size:clamp(1.6rem,7vw,2.4rem);font-weight:800;color:var(--c);margin:4px 0 12px;word-break:break-word}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg)}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok);animation:pop .4s}
+.opt.no{background:var(--bad);color:#fff;border-color:var(--bad);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.stats{display:flex;gap:16px;margin-bottom:12px;color:var(--mut)}
+.stats b{color:var(--ink);font-size:1.3rem}
+.next{margin-top:12px;padding:10px 18px;border-radius:999px;border:0;background:var(--ink);color:var(--bg);font-weight:600}
+.fb2{margin-top:10px;color:var(--mut)}
+.visual{width:100%;height:210px;flex:0 0 210px;border-radius:10px;background:transparent;display:block;margin:0 0 6px;overflow:hidden}
+.in{display:block}.fa,.fb{min-width:0}.fa{display:flex;flex-direction:column;align-items:stretch}.fa .fa-title{display:block}.fb{flex:1}
+.learn-actions{display:flex;justify-content:flex-end;margin:8px 0 12px}.learn-actions button{border:0;border-radius:999px;padding:9px 14px;background:var(--ink);color:var(--bg);font-weight:600}
+footer{margin-top:36px;color:var(--mut);font-size:.85rem}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.body-map{position:relative;width:100%;height:210px;display:flex;justify-content:center;align-items:center;background:#e8eef0;border-radius:10px;overflow:hidden}.body-map img{height:100%;width:100%;object-fit:contain}.body-map .spot{position:absolute;width:25px;height:25px;border:3px solid #fff;background:rgba(255,55,65,.48);box-shadow:0 0 0 4px rgba(255,55,65,.22);border-radius:50%;transform:translate(-50%,-50%)}.body-map .spot:after{content:"";position:absolute;inset:-8px;border:2px solid rgba(255,55,65,.6);border-radius:50%;animation:pulse 1.6s infinite}@keyframes pulse{50%{transform:scale(1.35);opacity:.25}}.body-caption{font-size:11px;color:var(--mut);text-align:center;display:block;margin-top:2px}
+</style></head>
+<body><main>
+<h1 aria-label="peri card itis"><span class="a">peri</span><span class="b">card</span><span class="c">itis</span></h1>
+<p class="sub">Every medical term is built from small pieces: prefix + root + suffix. Learn the pieces and you can decode words you have never seen.</p>
+<nav role="tablist"><button aria-selected="true" data-t="build" role="tab">Build</button><button aria-selected="false" data-t="learn" role="tab">Learn</button><button aria-selected="false" data-t="quiz" role="tab">Quiz</button></nav>
+<section id="build">
+<div class="slots">
+<div class="slot P"><label for="sp">Prefix (before)</label><select id="sp"></select></div>
+<div class="slot R"><label for="sr">Root (body part)</label><select id="sr"></select></div>
+<div class="slot S"><label for="ss">Suffix (ending)</label><select id="ss"></select></div>
+</div>
+<div aria-live="polite" class="out" id="out"></div>
+<div class="legend" id="leg"></div>
+<h2>Try a real term</h2>
+<div class="chips" id="chips"></div>
+</section>
+<section hidden="" id="learn">
+<div class="bar" id="lf"></div>
+<div class="learn-actions"><button id="studyQuiz" type="button">Quiz this section →</button></div>
+<div class="bar"><input aria-label="Search" id="q" placeholder="Search a part or meaning…" type="search"/></div>
+<div class="prog"><i id="pg"></i></div><div class="sub" id="pt" style="margin:0 0 12px"></div>
+<div class="grid" id="grid"></div>
+</section>
+<section hidden="" id="quiz">
+<div class="bar" id="qf"></div>
+<div class="stats"><div><b id="sc">0</b> correct</div><div><b id="wc">0</b> wrong</div><button class="chip" id="resetQuiz" type="button">Reset score</button></div>
+<div class="q" id="qb"></div>
+</section>
+<footer>Study aid for medical coding. Always confirm terms against your textbook or the official code books.</footer>
+</main>
+<script>
+const raw={
+p:`a-, an-|absence of|Apathy, Analgia
+ab-|away from|Abduction
+ad-|toward, very|Adduction
+aesthesio- (BrE)|sensation|Anesthesia
+alb-|color|Albino
+allo-|different, or as an addition|Alloantigen, allopathy
+ambi-|Describing both of two|Ambidextrous
+amnio-|(amnion)|Amniocentesis
+amph-, amphi-|on both sides|amphomycin
+an-|not, without|Analgesia
+ana-|back, again, up|Anaplasia
+aniso-|unequal|Anisotropic, anisocytosis
+ante-|another thing|antepartum
+anti-|another|Antibody, antipsychotic
+apo-|from|Apoptosis
+arch(i,e,o)|first, primitive|kidney
+axill-|armpit|Axilla
+azo(to)|nitrogenous compound|blood
+balano-|clitoridis|Balanitis
+bi-|twice, double|—
+bio-|life|Biology
+brachy-|commonly 'little'|brachycephalic
+brady-|'slow'|Bradycardia
+capill-|Of or pertaining to hair|Capillus
+capit-|whole)|Capitation
+cili-|the eyelashes; eyelids|Ciliary
+circum-|'around' another|Circumcision
+cis-|on this side|—
+clast|break|osteoclast
+co-|with, together, in association|—
+col-, colo-, colono-|colon|Colonoscopy
+com-|with, together|—
+contra|against|Contraindicate
+cor-|with, together|—
+cor-, core-, coro-|pupil|Corectomy
+cordi-|Of or pertaining to the heart|Commotio cordis
+di-|two|—
+di-|apart, separation|—
+dia-|through. during.|Diacetyl
+dif-|apart, separation|—
+digit-|[rare as a root]|Digit
+dis-|separation, taking apart|Dissection
+eu-|true, good, well, new|Eukaryote
+ex-|out of, away from|—
+exo-|'outside' another|Exoskeleton
+extra-|outside|—
+filli-|fine, hair like|—
+fossa|—|fossa ovalis
+front-|forehead|Frontonasal
+genu-|Of or pertaining to the knee|Genu valgum
+gingiv-|Of or pertaining to the gums|Gingivitis
+gluco-|glucose|Glucocorticoid
+glyco-|sugar|Glycolysis
+gyn(aec)o- (BrE),|—|—
+gyn(ec)o- (AmE)|woman|Gynecomastia
+halluc-|to wander in mind|Hallucinosis
+hemat-, haemato-|—|Hematology, older form
+(haem-, hem-)|Of or pertaining to blood|Haematology
+hema or hemo-|blood (AmE)|Hematological malignancy
+hemi-|one-half|Cerebral hemisphere
+hepat- (hepatic-)|Of or pertaining to the liver|Hepatology
+hyper-|'extreme' or 'beyond normal'|Hypertension
+idio-|self, one's own|Idiopathic
+ileo-|ileum|Ileocecal valve
+infra-|below|Infrahyoid muscles
+inter-|between, among|Interarticular ligament
+intra-|within|Intracranial hemorrhage
+ischio-|ischium, the hip-joint|Ischiorrhogic
+iso-|being 'equal'|Isotonic
+isch-|Restriction|Ischemia
+karyo-|nucleus|Eukaryote
+latero-|lateral|Lateral pectoral nerve
+manu-|Of or pertaining to the hand|Manufacture
+megaly|enlargement|Splenomegaly
+melos|extremity|erythromelalgia
+mero-|part|merocrine, meroblastic
+meta-|after, behind|Metacarpus
+micro-|smallness|Microscope
+neo-|new|Neoplasm
+nerv-|and the nervous system|Nerve
+normo-|normal|Normocapnia
+ole|small or little|—
+omata (plural)|tumor, mass, collection|Sarcoma, Teratoma
+onco-|tumor, bulk, volume|Oncology
+oo-|ovum|Oogenesis
+osseo-|bony|—
+ossi-|bone|Peripheral ossifying fibroma
+ovo-, ovi-, ov-|the ovum|Ovogenesis
+oxo-|addition of oxygen|—
+oxy-|sharp, acid, acute, oxygen|—
+pachy-|thick|pachyderma
+palpebr-|Of or pertaining to the eyelid|Palpebra
+papill-|(of the chest/breast)|Papillitis
+para-|alongside of, abnormal|—
+parvo-|small|Parvovirus
+ped-, -ped-, -pes|footed|Pedoscope
+peo-|Of or pertaining to the penis|Peotomy
+per-|through|—
+peri-|'around' another|Periodontal
+phaco-|lens-shaped|phacoscotoma
+phagist-:|word|Lotophagi
+phallo-|phallus|Aphallia
+pharmaco-|drug, medication|pharmacology
+phos-|chemical properties.|Phosphene
+phrenico|mind]|Phrenic nerve, schizophrenia
+pleio-|more, excessive, multiple|pleiomorphism
+pod-, -pod-, -pus|footed|Podiatry
+polio-|Denoting a grey color|Poliomyelitis
+poly-|something|Polymyositis
+post-|or 'behind' another|Postoperation, Postmortem
+pre-|[physical] position or time)|Prematurity
+prim-|or 'most-important'|Primary
+pro-|[physical] position or time)|Procephalic
+pseudo-|fake|—
+pulmon-, pulmo-|Of or relating to the lungs.|pulmonary
+pyo-|pus|Pyometra
+pyro-|fever|Antipyretic
+radio-|radiation|radiowave
+re-|again, backward|relapse
+retro-|backward, behind|retroverted
+sangui-, sanguine-|Of or pertaining to blood|Sanguine
+sarco-|muscular, fleshlike|sarcoma
+semi-|one-half, partly|—
+sinus-|Of or pertaining to the sinus|Sinusitis
+sito-|food, grain|—
+somatico-|body, bodily|—
+spasmo-|spasm|—
+sperma-, spermo-,|—|—
+spermato-|semen, spermatozoa|Spermatogenesis
+stheno-|strength, force, power|—
+sub-|beneath|subcutaneous tissue
+super-|in excess, above, superior|superior vena cava
+supra-|above, excessive|supraorbital vein
+sys-|or being together.|Syssarcosis
+tachy-|irregularly fast|Tachycardia
+tetan-|rigid, tense|tetanus
+thec-|case, sheath|Intrathecal
+thely-|feminine'|Thelygenous
+, thoracico-|chest, chest|Thorax
+toco-|childbirth|—
+tono-|tone, tension, pressure|—
+toxico-|toxin, poison|Toxoplasmosis
+trans-|or 'through'|Transfusion
+ultra-|beyond, excessive|—
+umbilic-|the umbilicus|Umbilical
+ungui-|claw|Unguiform, Ungual
+urin-|urinary system|Uriniferous
+vagin-|vagina|Vagina
+vasculo-|blood vessel|—
+ven-|vascular system ]|Vein, Venospasm`,
+r:`abdomin(o)-|abdomen|Abdomen
+acanth(o)-|thorn or spine|acanthoma, acanthulus
+acous(io)-|Of or relating to hearing|acoumeter, acoustician
+acr(o)-|extremity, topmost|acroosteolysis, acroposthia
+aden(o)-, aden(i)-|Of or relating to a gland|adenotome, adenotyphus
+adip(o)-|tissue|Adipocyte
+adren(o)-|glands|adrenal artery
+aer(o)-|air, gas|Aerosinusitis
+alge(si)-|pain|Analgesic
+alg(i)o-|pain|Myalgia
+an(o)|anus|—
+andr(o)-|pertaining to a man|Andrology, android
+angi(o)-|blood vessel|Angiogram
+ankyl(o)-, ancyl(o)-|crooked or bent|Ankylosis
+arteri(o)-|Of or pertaining to an artery|Artery, Arteriole
+arthr(o)-|limbs|Arthritis
+articul(o)-|joint|Articulation
+atel(o)|development|development of the heart
+atri(o)-|an atrium (esp. heart atrium)|atrioventricular
+aur(i)-|Of or pertaining to the ear|Aural
+aut(o)-|self|Autoimmune
+aux(o)-|increase; growth|the heart
+blast(o)-|germ or bud|Blastomere
+blephar(o)-|Of or pertaining to the eyelid|Blepharoplast
+brachi(o)-|Of or relating to the arm|Brachium of inferior colliculus
+bronch(i)-|bronchus|Bronchiolitis obliterans
+bucc(o)-|Of or pertaining to the cheek|Buccolabial
+burs(o)-|bones/ Latin|—
+carcin(o)-|cancer|Carcinoma
+cardi(o)-|Of or pertaining to the heart|Cardiology
+colp(o)-|vagina|Colposcopy
+dermat(o)-, derm(o)- Of or pertaining to the skin|—|Dermatology
+dextr(o)-|right, on the right side|Dextrocardia
+dors(o)-, dors(i)-|Of or pertaining to the back|dorsal, Dorsocephalad
+faci(o)-|Of or pertaining to the face|Facioplegic
+fibr(o)|fiber|Fibroblast
+galact(o)-|milk|Galactorrhea
+gastr(o)-|stomach|Gastric bypass
+glauc(o)-|color|Glaucoma
+gloss(o)-, glott(o)-|tongue|Glossology
+gnath(o)-|Of or pertaining to the jaw|Gnathodynamometer
+gon(o)-|reproductive|Gonorrhea
+heter(o)-|addition, or different|Heterogeneous
+hidr(o)-|sweat|Hyperhidrosis
+hist(o)-, histio-|tissue|Histology
+home(o)-|similar|Homeopathy
+hom(o)-|common|Homosexuality
+humer(o)-|shoulder or upper arm|Humerus
+hydr(o)-|water|Hydrophobe
+hyp(o)-|'below normal'|Hypovolemia,
+hyster(o)-|womb, the uterus|Hysterectomy
+iatr(o)-|or a physician|Iatrochemistry
+irid(o)-|iris|Iridectomy
+kerat(o)-|cornea (eye or skin)|Keratoscope
+kin(e)-, kin(o),|—|—
+kinesi(o)-|movement|Kinesthesia
+koil(o)-|hollow|Koilocyte
+kyph(o)-|humped|Kyphoscoliosis
+labi(o)-|Of or pertaining to the lip|Labiodental
+lacrim(o)-|tear|Lacrimal canaliculi
+lact(i)-, lact(o)|milk|Lactation
+lapar(o)-|abdomen-wall, flank|Laparotomy
+laryng(o)-|larynx,|Larynx
+lei(o)-|smooth|Leiomyoma
+lept(o)-|light, slender|—
+leuc(o)-, leuk(o)-|Denoting a white color|Leukocyte
+lingu(a)-, lingu(o)-|tongue|Linguistics
+lip(o)-|fat|Liposuction
+lith(o)-|stone, calculus|Lithotripsy
+log(o)-|speech|—
+lymph(o)-|lymph|Lymphedema
+lys(o)-, -lytic|dissolution|Lysosome
+macr(o)-|large, long|Macrophage
+mamm(o)-|breast|Mammogram
+mammill(o)-|Of or pertaining to the nipple|—
+mast(o)-|breast|Mastectomy
+meg(a)-, megal(o)-, -|—|—
+melan(o)-|black color|Melanin
+mening(o)-|membrane|Meningitis
+mes(o)-|middle|Mesoderm
+metr(o)-|instruments of the uterus|Metrorrhagia
+mon(o)-|single|Infectious mononucleosis
+morph(o)-|form, shape|Morphology
+muscul(o)-|muscle|Musculoskeletal system
+my(o)-|Of or relating to muscle|Myoblast
+myc(o)-|fungus|Onychomycosis
+myel(o)-|marrow|Myeloblast
+myring(o)-|eardrum|Myringotomy
+myx(o)-|mucus|Myxoma
+narc(o)-|numb, sleep|narcolepsy
+nas(o)-|Of or pertaining to the nose|nasal
+necr(o)-|death|Necrotizing fasciitis
+nephr(o)-|kidney|Nephrology
+neur(i)-, neur(o)-|and the nervous system|Neurofibromatosis
+ocul(o)-|Of or pertaining to the eye|Oculist
+odont(o)-|Of or pertaining to teeth|orthodontist
+odyn(o)-|pain|stomatodynia
+olig(o)-|'having little, having few'|Oligotrophy
+om(o)-|shoulder|Omoplate
+omphal(o)-|the umbilicus|Omphalotomy
+onych(o)-|(of a finger or toe)|Onychophagy
+oophor(o)-|woman's ovary|Oophorectomy
+ophthalm(o)-|Of or pertaining to the eye|Ophthalmology
+optic(o)-|properties of the eye|Opticochemical
+or(o)-|mouth|Oral
+orchi(o)-, orchido-|testis|Orchiectomy, Orchidectomy
+orth(o)-|straight or correct|Orthodontist
+ost(e)-, oste(o)-|bone|Osteoporosis
+ot(o)-|Of or pertaining to the ear|Otopathy
+ovari(o)-|ovaries|Ovariectomy
+pan-, pant(o)-|'everything'|panophobia, panopticon
+papul(o)-|skin, a pimple, swelling|Papulation
+path(o)-|disease|Pathology
+pelv(i)-, pelv(o)-|hip bone|Pelvis
+pharyng(o)-|cavity|Pharyngitis, Pharyngoscopy
+phleb(o)-|(blood) veins, a vein|Phlebography, Phlebotomy
+phob(o)-|exaggerated fear, sensitivity|arachnophobia
+phon(o)-|sound|—
+phot(o)-|Of or pertaining to light|Photopathy
+phren(i)-, phren(o)-,|(anatomy)/diaphragm], the|—
+pleur(o)-, pleur(a)|Of or pertaining to the ribs|Pleurogenous
+pneum(o)-|Of or pertaining to the lungs|Pneumonocyte, Pneumonia
+pneumat(o)-|air, lung|—
+por(o)-|pore, porous|—
+porphyr(o)-|Denotes a purple color|Porphyroblast
+presby(o)-|old age|Presbyopia
+proct(o)-|anus, rectum|proctology
+prot(o)-|or 'most-important'|Protoneuron
+pyel(o)-|pelvis|Pyelonephritis
+quadr(i)-|four|quadriceps
+rect(o)-|rectum|—
+ren(o)-|kidney|renal
+reticul(o)-|net|—
+rhabd(o)-|rod shaped, striated|—
+rhachi(o)-|spine|rachiopathy
+rhin(o)-|Of or pertaining to the nose|rhinoceros, rhinoplasty
+rhod(o)-|Denoting a rose-red color|Rhodophyte
+rubr(o)-|nucleus of the brain|Rubrospinal
+salping(o)-|fallopian tubes|Salpingectomy
+schist(o)-|split, cleft|—
+schiz(o)-|'double-sided'|Schizophrenia
+scler(o)-|hardness|atherosclerosis
+scoli(o)-|twisted|scoliosis
+sial(o)-|saliva, salivary gland|sialagogue
+sigmoid(o)-|sigmoid, sigmoid colon|—
+sinistr(o)-|left, left side|—
+somat(o)-,|—|—
+splanchn(i)-,|—|—
+splanchn(o)-|viscera|—
+splen(o)-|spleen|Splenectomy
+spondyl(o)-|the vertebra|Spondylitis
+squamos(o)-|of scales' or 'scaly'|Squama
+sten(o)-|pertaining to narrow-ness|Stenography
+steth(o)-|chest, chest|Stethoscope
+stom(a)|mouth|stomatognathic system
+stomat(o)-|mouth|Stomatogastric
+sy(l)-, sym-, syn-,|Indicates similarity, likeness,|Synalgia, Synesthesia,
+thel(e)-, thel(o)-|Of or pertaining to a nipple|Theleplasty
+therm(o)-|heat|—
+thorac(i)-, thorac(o)-|Of or pertaining to the upper|—
+thromb(o)-|clotting of blood|Thrombocytopenia
+thyr(o)-|thyroid|—
+thym(o)(ia)-|emotions|dysthymia
+top(o)-|place, topical|—
+tox(i)-, tox(o)-,|—|—
+trache(o)-|trachea|—
+trachel(o)-|Of or pertaining to the neck|Tracheotomy
+trich(i)-, trichia,|Of or pertaining to hair, hair-|—
+trich(o)-|like structure|Trichotomy
+tympan(o)-|eardrum|Tympanocentesis
+un(i)-|one|Unilateral hearing loss
+ur(o)-|urinary system.|Urology
+uri(c)-, urico-|uric acid|—
+uter(o)-|uterus or womb|Uterus
+varic(o)-|swollen or twisted vein|varicose
+vas(o)-|duct, blood vessel|vasoconstriction
+ventr(o)-|the stomach cavities|Ventrodorsal
+vesic(o)-|bladder|Vesica
+viscer(o)-|internal organs, the viscera|Viscera
+xanth(o)-|abnormally yellow color|Xanthopathy`,
+s:`-ac, -acal|pertaining to|pharmacomaniacal
+-acusis|hearing|paracusis
+-ad|toward, in the direction of|dorsad
+-aemia (BrE)|blood condition|Anaemia
+-al|pertaining to|abdominal
+-algia|pain|Myalgia
+-ary|pertaining to|bilary tract
+-ase|enzyme|Lactase
+-asthenia|weakness|Myasthenia gravis
+-ation|process|—
+-cidal, -cide|killing, destroying|bacteriocidal
+-desis|binding|arthrodesis
+-form, -iform|of'|Cuneiform
+-gen|sense 'of a certain kind'|Heterogenous
+-genic|producing|Cardiogenic shock
+-gnosis|knowledge|diagnosis, prognosis
+-gram|record or picture|Angiogram
+-graph|record or picture|Electrocardiograph
+-graphy|process of recording|Angiography
+-i-asis|condition|Mydriasis
+-iatry|of a certain body component|Podiatry, Psychiatry
+-ic|pertaining to|Hepatic artery
+-icle|small|Ovarian follicle
+-ics|treatment|—
+-ism|condition, disease|Dwarfism
+-ismus|spasm, contraction|—
+-ist|one who specializes in|Pathologist
+-ite|the nature of, resembling|Hermaphrodite
+-itis|inflammation|Tonsillitis
+-ium|structure, tissue|pericardium
+-lepsis, -lepsy|attack, seizure|Epilepsy, narcolepsy
+-logist|_____-logy|Oncologist, pathologist
+-logy|or practice of a certain field|hematology, urology
+-lysis|Destruction, separation|Paralysis
+-malacia|softening|Osteomalacia
+-meter|measurement|Sphygmomanometer
+-metry|process of measuring|Optometry
+-oid|resemblance to|Sarcoidosis
+-oma (singular), -|—|—
+-osis|increase|Psychosis, osteoperosis
+-ous|pertaining to|—
+-paresis|slight paralysis|hemiparesis
+-pathy|disorder|sociopathy, neuropathy
+-penia|deficiency|osteopenia
+-pepsia|tract.|Dyspepsia
+-pexy|fixation|Nephropexy
+-phage, -phagia|or ingestion|Sarcophagia
+-phago-|eating, devouring|phagocyte
+-phagy|or part of the word|Anthropophagy
+-phil(ia)|attraction for|Hemophilia
+-plasia|formation, development|Achondroplasia
+-plasty|reconstruction|rhinoplasty
+-plegia|paralysis|paraplegia
+-plexy|stroke or seizure|Cataplexy
+-poiesis|production|hematopoiesis
+-ptosis|placement, prolapse|falling
+-ptysis|Spitting|or bronchial tubes
+-rrhage|burst forth|Hemorrhage
+-rrhagia|rapid flow of blood|—
+-rrhaphy|surgical suturing|—
+-rrhea (AmE)|flowing, discharge|Galactorrhea, Diarrhea
+-rrhexis|rupture|—
+-rrhoea (BrE)|flowing, discharge|Diarrhoea
+-sclerosis|hardening of the skin|Multiple sclerosis
+-scope|instrument for viewing|stethoscope
+-scopy|viewing|endoscopy
+-stasis|stop, stand|—
+-staxis|dripping, trickling|—
+-stomy|creation of an opening|colostomy
+-tension, -tensive|pressure|Hypertension
+-tic|pertaining to|—
+-tome|cutting instrument|—
+-tomy|incision|Gastrotomy
+-tony|tension|—
+-tripsy|crushing|Lithotripsy
+-trophy|nourishment, development|Pseudohypertrophy
+-ula, -ule|small|Nodule`};
+
+const NAME={p:'Prefix',r:'Root',s:'Suffix'},D={};
+for(const k in raw)D[k]=raw[k].trim().split('\n').map(l=>{const parts=l.split('|');const f=parts.shift()||'';const m=parts.shift()||'';const e=parts.join('|')||'';return{f:f.trim(),m:m.trim(),e:e.trim(),k}}).filter(x=>x.f);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const vars=x=>x.f.split('/').map(s=>s.replace(/\(.*?\)/g,'').replace(/-/g,'').trim());
+const vow=/^[aeiouy]/;
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+/* tabs */
+$$('nav button').forEach(b=>b.onclick=()=>{
+  $$('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));
+  ['build','learn','quiz'].forEach(t=>$('#'+t).hidden=t!==b.dataset.t);
+  if(b.dataset.t==='quiz'&&!$('#qb').innerHTML)nextQ();
+});
+
+/* build */
+const sel={p:$('#sp'),r:$('#sr'),s:$('#ss')};
+for(const k in sel){sel[k].innerHTML='<option value="-1">(none)</option>'+D[k].map((x,i)=>`<option value="${i}">${esc(x.f)} – ${esc(x.m)}</option>`).join('');sel[k].onchange=render}
+const pick=k=>+sel[k].value<0?null:D[k][+sel[k].value];
+function render(){
+  const p=pick('p'),r=pick('r'),s=pick('s');
+  const sS=s?vars(s)[0]:'',rS=r?vars(r)[0]:'';
+  const nxt=(rS||sS)[0]||'';
+  let pS='';if(p){const v=vars(p);pS=v.length>1&&vow.test(nxt)?v[v.length-1]:v[0]}
+  const o=r&&s&&!vow.test(sS)?'o':'';
+  const segs=[];
+  if(p)segs.push(['P',pS]);if(r)segs.push(['R',rS+o]);if(s)segs.push(['S',sS]);
+  $('#out').innerHTML=segs.length?segs.map(([c,t])=>[...t].map((ch,i)=>`<i class="${c}" style="animation-delay:${i*30}ms">${ch}</i>`).join('')).join(''):'<span style="color:var(--mut);font-weight:400">Pick pieces above</span>';
+  $('#leg').innerHTML=[[p,'P'],[r,'R'],[s,'S']].filter(a=>a[0]).map(([x,c])=>`<div class="${c}"><b>${esc(x.f)}</b> means ${esc(x.m)}</div>`).join('');
+}
+const find=(k,b)=>D[k].findIndex(x=>vars(x).includes(b));
+const real=[['peri','cardi','itis'],['','nephr','ectomy'],['brady','cardi','ia'],['poly','neur','itis'],['','hemat','oma'],['','cholecyst','ectomy'],['hypo','glyc','emia'],['endo','','scopy'],['','arthr','algia'],['','gastr','enter'],['dys','','phagia'],['','cardi','logy']].filter(a=>a[2]!=='enter');
+$('#chips').innerHTML=real.map((a,i)=>`<button class="chip" data-i="${i}">${a[0]}${a[1]}${a[1]&&a[2]&&!vow.test(a[2])?'o':''}${a[2]}</button>`).join('');
+$$('.chip').forEach(c=>c.onclick=()=>{const a=real[c.dataset.i];['p','r','s'].forEach((k,j)=>sel[k].value=a[j]?find(k,a[j]):-1);render()});
+sel.p.value=find('p','peri');sel.r.value=find('r','cardi');sel.s.value=find('s','itis');render();
+
+/* learn */
+let known=new Set();
+try{known=new Set(JSON.parse(localStorage.getItem('wp-known')||'[]'))}catch(e){}
+const save=()=>{try{localStorage.setItem('wp-known',JSON.stringify([...known]))}catch(e){}};
+let ft='all';
+const filt=(id,cb)=>{
+  $(id).innerHTML=[['all','All'],['p','Prefixes'],['r','Roots'],['s','Suffixes']].map(([k,n])=>`<button class="pill" data-k="${k}" aria-pressed="${k==='all'}">${n}</button>`).join('');
+  $$(id+' .pill').forEach(b=>b.onclick=()=>{$$(id+' .pill').forEach(x=>x.setAttribute('aria-pressed',x===b));cb(b.dataset.k)});
+};
+const all=[...D.p,...D.r,...D.s],key=x=>x.k+':'+x.f;
+function visualFor(x){
+  const t=(x.f+' '+x.m+' '+x.e).toLowerCase();
+  if(/heart|cardi/.test(t))return '❤️'; if(/brain|neur|encephal/.test(t))return '🧠';
+  if(/kidney|nephr|ren/.test(t))return '🫘'; if(/blood|hemat|hem/.test(t))return '🩸';
+  if(/bone|oste|arthr|joint/.test(t))return '🦴'; if(/stomach|gastr|digest|enter/.test(t))return '🫃';
+  if(/liver|hepat/.test(t))return '🟤'; if(/lung|pneum|respir/.test(t))return '🫁';
+  if(/skin|derm/.test(t))return '🖐️'; if(/eye|ophthalm|ocul/.test(t))return '👁️';
+  if(/ear|ot/.test(t))return '👂'; if(/muscle|my/.test(t))return '💪';
+  if(/urine|cyst|bladder/.test(t))return '🚻'; if(/uter|gynec|pregnan/.test(t))return '🤰';
+  if(/mouth|oral|dent|tooth/.test(t))return '🦷'; if(/cut|incision|tomy|tome/.test(t))return '✂️';
+  if(/opening|stomy/.test(t))return '⭕'; if(/small|little|ule/.test(t))return '🔎';
+  if(x.k==='p')return '↔️'; if(x.k==='s')return '🧩'; return '🩺';
+}
+const bodySpots={
+ heart:[50,43],brain:[50,8],kidney:[39,62],liver:[40,51],stomach:[56,55],lung:[50,39],bone:[27,55],skin:[50,48],eye:[50,16],ear:[36,18],nerve:[50,32],muscle:[28,54],vessel:[50,48],blood:[50,48],intestine:[50,70],bladder:[50,84],uterus:[50,81],thyroid:[50,27],tooth:[50,18],nose:[50,20],mouth:[50,22],spleen:[68,55],pancreas:[53,59],gallbladder:[39,56],generic:[50,50]
+};
+function art(type){return '<div style=\"height:12px\"></div>'}
+function rootSpot(x){const t=(x.f+' '+x.m+' '+x.e).toLowerCase();if(/heart|cardi|atri(o)|cordi/.test(t))return 'heart';if(/brain|encephal|cerebr|cephal|crani|psych/.test(t))return 'brain';if(/kidney|nephr|ren-/.test(t))return 'kidney';if(/liver|hepat|jecor/.test(t))return 'liver';if(/stomach|gastr|ventr|digest|enter|intestin/.test(t))return 'stomach';if(/lung|pneum|pulmon|bronch/.test(t))return 'lung';if(/bone|oste|chondr|arthr|joint|carp(o)|spondyl/.test(t))return 'bone';if(/skin|derm|cutane|cuticul/.test(t))return 'skin';if(/eye|ophthalm|ocul|irid/.test(t))return 'eye';if(/ear|ot(o)|aur/.test(t))return 'ear';if(/nerve|neur|nerv|myel|spinal/.test(t))return 'nerve';if(/muscle|my(o)|sarc/.test(t))return 'muscle';if(/blood|hemat|haem|hem-|sangu|thromb|angi|arteri|phleb|ven-/.test(t))return 'blood';if(/intestin|colon|rect|proct|col(o)/.test(t))return 'intestine';if(/bladder|cyst|vesic/.test(t))return 'bladder';if(/uter|hyster|metr|ovari|oophor|salping|colp/.test(t))return 'uterus';if(/thyroid|thyr/.test(t))return 'thyroid';if(/tooth|dent|odont/.test(t))return 'tooth';if(/nose|rhin|nas-/.test(t))return 'nose';if(/mouth|stomat|or-/.test(t))return 'mouth';if(/spleen|splen/.test(t))return 'spleen';if(/pancre|cholecyst|gallbladder/.test(t))return 'gallbladder';return 'generic'}
+const rootArt={
+ 'abdomin(o)/lapar(o)':'generic','aden(o)':'generic','adip(o)/lip(o)':'skin','angi(o)':'vessel','arteri(o)':'vessel','arthr(o)':'bone','aur(i)/ot(o)':'ear','bronch(o)':'lung','bucc(o)':'mouth','carcin(o)':'generic','cardi(o)':'heart','carp(o)':'bone','cephal(o)':'brain','cerebr(o)':'brain','cervic(o)':'generic','chol(e)':'gallbladder','cholecyst(o)':'gallbladder','chondr(o)':'bone','col(o)':'intestine','colp(o)':'uterus','cost(o)':'bone','crani(o)':'bone','cyst(o)':'bladder','cyt(o)':'generic','dactyl(o)':'bone','dent(i)/odont(o)':'tooth','dermat(o)':'skin','encephal(o)':'brain','enter(o)':'intestine','erythr(o)':'blood','gastr(o)':'stomach','gingiv(o)':'mouth','gloss(o)':'mouth','gluc(o)':'generic','glyc(o)':'generic','gyn(ec)o':'uterus','hemat(o)/hem(o)':'blood','hepat(o)':'liver','hist(o)':'generic','hydr(o)':'generic','hyster(o)':'uterus','kerat(o)':'eye','laryng(o)':'generic','leuk(o)':'blood','mamm(o)/mast(o)':'generic','melan(o)':'skin','mening(o)':'brain','metr(o)':'uterus','my(o)':'muscle','myel(o)':'bone','nas(o)/rhin(o)':'nose','necr(o)':'generic','nephr(o)':'kidney','neur(o)':'nerve','ocul(o)/ophthalm(o)':'eye','onych(o)':'skin','oophor(o)':'uterus','or(o)/stomat(o)':'mouth','orchi(o)':'generic','oste(o)':'bone','path(o)':'generic','pharyng(o)':'mouth','phleb(o)':'vessel','pneum(o)':'lung','pulmon(o)':'lung','proct(o)':'intestine','psych(o)':'brain','pyel(o)':'kidney','rect(o)':'intestine','ren(o)':'kidney','salping(o)':'uterus','sarc(o)':'muscle','scler(o)':'generic','splen(o)':'spleen','spondyl(o)':'bone','steth(o)':'generic','thorac(o)':'lung','thromb(o)':'blood','thyr(o)':'thyroid','trache(o)':'lung','trich(o)':'skin','ur(o)':'bladder','vas(o)':'vessel','ven(o)':'vessel','vesic(o)':'bladder','xanth(o)':'skin','cyan(o)':'blood','chlor(o)':'skin'
+};
+
+const rootMalayalam = {"abdomin(o)/lapar(o)": {"meaning": "വയറുഭാഗം", "example": "Laparotomy: വയറുതുറന്ന് ശസ്ത്രക്രിയ ചെയ്യുന്ന നടപടി"}, "aden(o)": {"meaning": "ഗ്രന്ഥി", "example": "Adenocarcinoma: ഗ്രന്ഥികളിൽ നിന്ന് തുടങ്ങുന്ന കാൻസർ"}, "adip(o)/lip(o)": {"meaning": "കൊഴുപ്പ്", "example": "Liposuction: ശരീരത്തിലെ കൊഴുപ്പ് നീക്കം ചെയ്യുന്ന നടപടി"}, "angi(o)": {"meaning": "രക്തക്കുഴൽ", "example": "Angiogram: രക്തക്കുഴലുകളുടെ ചിത്രം എടുക്കുന്ന പരിശോധന"}, "arteri(o)": {"meaning": "ധമനി", "example": "Arteriole: ചെറിയ ധമനി"}, "arthr(o)": {"meaning": "സന്ധി", "example": "Arthritis: സന്ധികളിലെ വീക്കം"}, "aur(i)/ot(o)": {"meaning": "ചെവി", "example": "Otitis: ചെവിയിലെ വീക്കം"}, "bronch(o)": {"meaning": "ശ്വാസനാളത്തിന്റെ ശാഖ", "example": "Bronchiolitis: ചെറിയ ശ്വാസനാളങ്ങളിൽ വീക്കം"}, "bucc(o)": {"meaning": "കവിൾ", "example": "Buccolabial: കവിളിനെയും ചുണ്ടിനെയും സംബന്ധിച്ചത്"}, "carcin(o)": {"meaning": "കാൻസർ", "example": "Carcinoma: ശരീരത്തിലെ epithelial കോശങ്ങളിൽ നിന്നുള്ള കാൻസർ"}, "cardi(o)": {"meaning": "ഹൃദയം", "example": "Cardiology: ഹൃദയത്തെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "carp(o)": {"meaning": "കൈമുട്ടിനും വിരലുകൾക്കും ഇടയിലെ കൈത്തണ്ട ഭാഗം", "example": "Carpopedal: കൈത്തണ്ടയെയും കാല്പാദത്തെയും സംബന്ധിച്ചത്"}, "cephal(o)": {"meaning": "തല", "example": "Cephalalgia: തലവേദന"}, "cerebr(o)": {"meaning": "മസ്തിഷ്കം (Cerebrum)", "example": "Cerebrology: മസ്തിഷ്കത്തെക്കുറിച്ചുള്ള പഠനം"}, "cervic(o)": {"meaning": "കഴുത്ത് / ഗർഭാശയമുഖം", "example": "Cervicodorsal: കഴുത്തിനെയും പുറത്തിന്റെ മുകള്ഭാഗത്തെയും സംബന്ധിച്ചത്"}, "chol(e)": {"meaning": "പിത്തരസം", "example": "Cholaemia: രക്തത്തിൽ പിത്തഘടകങ്ങൾ ഉണ്ടാകുന്ന അവസ്ഥ"}, "cholecyst(o)": {"meaning": "പിത്താശയം", "example": "Cholecystectomy: പിത്താശയം നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "chondr(o)": {"meaning": "തരുണാസ്ഥി (Cartilage)", "example": "Chondrocalcinosis: തരുണാസ്ഥിയിൽ കാൽസ്യം അടിയുന്ന അവസ്ഥ"}, "col(o)": {"meaning": "വൻകുടൽ", "example": "Colonoscopy: വൻകുടലിനുള്ളിൽ ക്യാമറ ഉപയോഗിച്ച് പരിശോധിക്കൽ"}, "colp(o)": {"meaning": "യോനി", "example": "Colposcopy: യോനി/ഗർഭാശയമുഖം പരിശോധിക്കുന്ന നടപടി"}, "cost(o)": {"meaning": "വാരിയെല്ല്", "example": "Costochondral: വാരിയെല്ലിനെയും തരുണാസ്ഥിയെയും സംബന്ധിച്ചത്"}, "crani(o)": {"meaning": "തലയോട്ടി", "example": "Craniology: തലയോട്ടിയെക്കുറിച്ചുള്ള പഠനം"}, "cyst(o)": {"meaning": "മൂത്രാശയം", "example": "Cystotomy: മൂത്രാശയത്തിൽ മുറിവുണ്ടാക്കുന്ന ശസ്ത്രക്രിയ"}, "cyt(o)": {"meaning": "കോശം", "example": "Cytokine: കോശങ്ങൾ തമ്മിൽ സന്ദേശം കൈമാറാൻ സഹായിക്കുന്ന പ്രോട്ടീൻ"}, "dactyl(o)": {"meaning": "വിരൽ (കൈ / കാൽ)", "example": "Dactylology: വിരലുകളെക്കുറിച്ചുള്ള പഠനം"}, "dent(i)/odont(o)": {"meaning": "പല്ല്", "example": "Dentist: പല്ലുകളുടെ ചികിത്സ നടത്തുന്ന ഡോക്ടർ"}, "dermat(o)": {"meaning": "ത്വക്ക്", "example": "Dermatology: ത്വക്കിനെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "encephal(o)": {"meaning": "മസ്തിഷ്കം", "example": "Encephalogram: മസ്തിഷ്കത്തിന്റെ രേഖാചിത്രം"}, "enter(o)": {"meaning": "കുടൽ", "example": "Gastroenterology: ആമാശയവും കുടലും സംബന്ധിച്ച പഠനവും ചികിത്സയും"}, "erythr(o)": {"meaning": "ചുവപ്പ് നിറം", "example": "Erythrocyte: ചുവന്ന രക്താണു"}, "gastr(o)": {"meaning": "ആമാശയം", "example": "Gastric bypass: ആമാശയവുമായി ബന്ധപ്പെട്ട ബൈപാസ് ശസ്ത്രക്രിയ"}, "gingiv(o)": {"meaning": "മോണ", "example": "Gingivitis: മോണയിലെ വീക്കം"}, "gloss(o)": {"meaning": "നാവ്", "example": "Glossology: നാവിനെക്കുറിച്ചുള്ള പഠനം"}, "gluc(o)": {"meaning": "ഗ്ലൂക്കോസ്", "example": "Glucocorticoid: ഗ്ലൂക്കോകോർട്ടിക്കോയ്ഡ് വിഭാഗത്തിലുള്ള ഹോർമോൺ/മരുന്ന്"}, "glyc(o)": {"meaning": "പഞ്ചസാര", "example": "Glycolysis: ഗ്ലൂക്കോസ് വിഘടിച്ച് ഊർജം ഉണ്ടാകുന്ന പ്രക്രിയ"}, "gyn(ec)o": {"meaning": "സ്ത്രീ", "example": "Gynecomastia: പുരുഷന്മാരിൽ സ്തനഗ്രന്ഥി വലുതാകുന്ന അവസ്ഥ"}, "hemat(o)/hem(o)": {"meaning": "രക്തം", "example": "Hematology: രക്തത്തെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "hepat(o)": {"meaning": "കരൾ", "example": "Hepatology: കരളിനെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "hist(o)": {"meaning": "കല (Tissue)", "example": "Histology: ശരീരകലകളെക്കുറിച്ചുള്ള പഠനം"}, "hydr(o)": {"meaning": "വെള്ളം", "example": "Hydrophobe: വെള്ളത്തെ അകറ്റുന്ന / കലരാത്ത വസ്തു"}, "hyster(o)": {"meaning": "ഗർഭാശയം", "example": "Hysterectomy: ഗർഭാശയം നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "kerat(o)": {"meaning": "കോർണിയ / ത്വക്കിന്റെ കട്ടിയുള്ള പാളി", "example": "Keratoscope: കോർണിയ/ത്വക്കുമായി ബന്ധപ്പെട്ട പരിശോധനാ ഉപകരണം"}, "laryng(o)": {"meaning": "ശബ്ദപ്പെട്ടി (Larynx)", "example": "Laryngitis: ശബ്ദപ്പെട്ടിയിലെ വീക്കം"}, "leuk(o)": {"meaning": "വെളുപ്പ്", "example": "Leukocyte: വെളുത്ത രക്താണു"}, "mamm(o)/mast(o)": {"meaning": "സ്തനം", "example": "Mammogram: സ്തനത്തിന്റെ X-ray ചിത്രം"}, "melan(o)": {"meaning": "കറുപ്പ് നിറം", "example": "Melanin: ത്വക്കിന് നിറം നൽകുന്ന പിഗ്മെന്റ്"}, "mening(o)": {"meaning": "മസ്തിഷ്കത്തെയും സുഷുമ്നയെയും മൂടുന്ന ആവരണങ്ങൾ", "example": "Meningitis: ഈ ആവരണങ്ങളിലെ വീക്കം"}, "metr(o)": {"meaning": "ഗർഭാശയം", "example": "Metrorrhagia: മാസവാരത്തിന് ഇടയിൽ ഉണ്ടാകുന്ന ഗർഭാശയ രക്തസ്രാവം"}, "my(o)": {"meaning": "പേശി", "example": "Myoblast: പേശിയായി വളരുന്ന പ്രാഥമിക കോശം"}, "myel(o)": {"meaning": "അസ്ഥിമജ്ജ", "example": "Myeloblast: അസ്ഥിമജ്ജയിലെ പ്രാഥമിക രക്തകോശം"}, "nas(o)/rhin(o)": {"meaning": "മൂക്ക്", "example": "Rhinoplasty: മൂക്കിന്റെ രൂപം മാറ്റുന്ന ശസ്ത്രക്രിയ"}, "necr(o)": {"meaning": "മരണം / കോശനാശം", "example": "Necrosis: ശരീരകലകളിലെ കോശങ്ങൾ നശിക്കുന്ന അവസ്ഥ"}, "nephr(o)": {"meaning": "വൃക്ക", "example": "Nephrology: വൃക്കയെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "neur(o)": {"meaning": "നാഡി", "example": "Neuropathy: നാഡികൾക്ക് ഉണ്ടാകുന്ന തകരാർ"}, "ocul(o)/ophthalm(o)": {"meaning": "കണ്ണ്", "example": "Ophthalmology: കണ്ണിനെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "onych(o)": {"meaning": "നഖം", "example": "Onychomycosis: നഖത്തിലെ ഫംഗസ് ബാധ"}, "oophor(o)": {"meaning": "അണ്ഡാശയം", "example": "Oophorectomy: അണ്ഡാശയം നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "or(o)/stomat(o)": {"meaning": "വായ", "example": "Stomatitis: വായ്ക്കുള്ളിലെ വീക്കം"}, "orchi(o)": {"meaning": "വൃഷണം", "example": "Orchiectomy: വൃഷണം നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "oste(o)": {"meaning": "അസ്ഥി", "example": "Osteoporosis: അസ്ഥികളുടെ സാന്ദ്രത കുറയുന്ന അവസ്ഥ"}, "path(o)": {"meaning": "രോഗം", "example": "Pathology: രോഗങ്ങളെക്കുറിച്ചുള്ള പഠനം"}, "pharyng(o)": {"meaning": "തൊണ്ട (Pharynx)", "example": "Pharyngitis: തൊണ്ടയിലെ വീക്കം"}, "phleb(o)": {"meaning": "സിര", "example": "Phlebotomy: രക്തം എടുക്കുന്നതിനായി സിരയിൽ സൂചി ഇടുന്ന നടപടി"}, "pneum(o)": {"meaning": "ശ്വാസകോശം / വായു", "example": "Pneumonia: ശ്വാസകോശത്തിലെ അണുബാധയും വീക്കവും"}, "pulmon(o)": {"meaning": "ശ്വാസകോശം", "example": "Pulmonary: ശ്വാസകോശവുമായി ബന്ധപ്പെട്ടത്"}, "proct(o)": {"meaning": "മലദ്വാരം / മലാശയം", "example": "Proctology: മലദ്വാരത്തെയും മലാശയത്തെയും സംബന്ധിച്ച പഠനവും ചികിത്സയും"}, "psych(o)": {"meaning": "മനസ്സ്", "example": "Psychiatry: മാനസികാരോഗ്യത്തെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "pyel(o)": {"meaning": "വൃക്കയിലെ മൂത്രശേഖരണ ഭാഗം", "example": "Pyelonephritis: വൃക്കയിലെ അണുബാധയും വീക്കവും"}, "rect(o)": {"meaning": "മലാശയം", "example": "Rectocele: മലാശയഭിത്തി യോനിയുടെ ഭാഗത്തേക്ക് തള്ളിവരുന്ന അവസ്ഥ"}, "ren(o)": {"meaning": "വൃക്ക", "example": "Renal: വൃക്കയുമായി ബന്ധപ്പെട്ടത്"}, "salping(o)": {"meaning": "ഫലോപ്പിയൻ ട്യൂബ്", "example": "Salpingectomy: ഫലോപ്പിയൻ ട്യൂബ് നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "sarc(o)": {"meaning": "മാംസകല / പേശി", "example": "Sarcoma: ബന്ധകലകളിൽ നിന്നുണ്ടാകുന്ന കാൻസർ"}, "scler(o)": {"meaning": "കഠിനം", "example": "Atherosclerosis: ധമനികളിൽ കൊഴുപ്പ് അടിഞ്ഞ് കട്ടിയാകുന്ന അവസ്ഥ"}, "splen(o)": {"meaning": "പ്ലീഹ", "example": "Splenectomy: പ്ലീഹ നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "spondyl(o)": {"meaning": "കശേരുക / നട്ടെല്ല്", "example": "Spondylitis: കശേരുക്കളിലെ വീക്കം"}, "steth(o)": {"meaning": "നെഞ്ച്", "example": "Stethoscope: നെഞ്ചിലെ ശബ്ദങ്ങൾ കേൾക്കാനുള്ള ഉപകരണം"}, "thorac(o)": {"meaning": "നെഞ്ച്", "example": "Thoracotomy: നെഞ്ച് തുറന്ന് ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "thromb(o)": {"meaning": "രക്തക്കട്ട", "example": "Thrombosis: രക്തക്കുഴലിൽ രക്തക്കട്ട രൂപപ്പെടുന്ന അവസ്ഥ"}, "thyr(o)": {"meaning": "തൈറോയ്ഡ് ഗ്രന്ഥി", "example": "Thyroidectomy: തൈറോയ്ഡ് ഗ്രന്ഥി നീക്കം ചെയ്യുന്ന ശസ്ത്രക്രിയ"}, "trache(o)": {"meaning": "ശ്വാസനാളം", "example": "Tracheotomy: ശ്വാസനാളത്തിൽ മുറിവുണ്ടാക്കുന്ന ശസ്ത്രക്രിയ"}, "trich(o)": {"meaning": "മുടി", "example": "Trichotomy: മുടി മുറിക്കുന്ന നടപടി"}, "ur(o)": {"meaning": "മൂത്രം / മൂത്രവ്യവസ്ഥ", "example": "Urology: മൂത്രവ്യവസ്ഥയെക്കുറിച്ചുള്ള പഠനവും ചികിത്സയും"}, "vas(o)": {"meaning": "രക്തക്കുഴൽ / നാളി", "example": "Vasoconstriction: രക്തക്കുഴൽ ചുരുങ്ങൽ"}, "ven(o)": {"meaning": "സിര", "example": "Venospasm: സിരയിലെ പേശി ചുരുങ്ങൽ"}, "vesic(o)": {"meaning": "മൂത്രാശയം", "example": "Vesica: മൂത്രാശയം"}, "xanth(o)": {"meaning": "മഞ്ഞ നിറം", "example": "Xanthopathy: മഞ്ഞ നിറവുമായി ബന്ധപ്പെട്ട രോഗാവസ്ഥ"}, "cyan(o)": {"meaning": "നീല നിറം", "example": "Cyanosis: രക്തത്തിലെ ഓക്സിജൻ കുറയുമ്പോൾ ചർമ്മം നീലനിറമാകുന്ന അവസ്ഥ"}, "chlor(o)": {"meaning": "പച്ച നിറം", "example": "Chlorophyll: സസ്യങ്ങൾക്ക് പച്ചനിറം നൽകുന്ന വർണ്ണകം"}};
+
+function grid(){
+  const q=$('#q').value.toLowerCase();
+  const L=all.filter(x=>(ft==='all'||x.k===ft)&&(x.f+x.m+x.e).toLowerCase().includes(q));
+  $('#grid').innerHTML=L.map(x=>`<div class="card ${x.k.toUpperCase()}" data-key="${esc(key(x))}"><div class="in"><div class="fa">${x.k==='r'?art(rootArt[x.f]||rootSpot(x)):'<div style="height:12px"></div>'}<div class="fa-title"><small>${NAME[x.k]}</small><br><b>${esc(x.f)}</b></div></div><div class="fb"><b>${esc(x.m)}</b><small>e.g. ${esc(x.e)}</small>${x.k==='r'&&rootMalayalam[x.f]?.example?`<small>ഉദാഹരണത്തിന്റെ അർത്ഥം: ${esc(rootMalayalam[x.f].example)}</small>`:''}</div></div><button class="star" aria-label="Mark as known" aria-pressed="${known.has(key(x))}">★</button></div>`).join('')||'<p class="sub">Nothing found.</p>';
+  $$('.card').forEach(c=>{
+    c.onclick=e=>{if(!e.target.closest('button'))c.classList.toggle('f')};
+    c.querySelector('.star').onclick=e=>{e.stopPropagation();const k=c.dataset.key;known.has(k)?known.delete(k):known.add(k);e.target.setAttribute('aria-pressed',known.has(k));save();prog()};
+  });
+  prog();
+}
+function prog(){const n=all.filter(x=>known.has(key(x))).length;$('#pg').style.width=n/all.length*100+'%';$('#pt').textContent=`${n} of ${all.length} marked as known. Tap a card to flip it, tap ★ when you know it.`}
+filt('#lf',k=>{ft=k;grid()});$('#q').oninput=grid;grid();
+$('#studyQuiz').onclick=()=>{qt=ft;$$('#qf .pill').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===qt));$$('nav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t==='quiz'));['build','learn','quiz'].forEach(t=>$('#'+t).hidden=t!=='quiz');nextQ()};
+
+/* quiz */
+let qt='all',score=0,wrong=0;
+$('#resetQuiz').onclick=()=>{score=0;wrong=0;$('#sc').textContent=0;$('#wc').textContent=0;nextQ()};
+filt('#qf',k=>{qt=k;nextQ()});
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+function nextQ(){
+  const pool=(qt==='all'?all:(D[qt]||[])).filter(x=>x&&x.f);
+  if(!pool.length){$('#qb').innerHTML='<p>No terms found in this section.</p>';return;}
+  const a=pool[Math.floor(Math.random()*pool.length)];
+  const distractorPool=(qt==='all'?all:(D[a.k]||pool)).filter(x=>x!==a && x.m!==a.m && x.f!==a.f);
+  const distractors=shuf(distractorPool).slice(0,3);
+  // Always show four choices; if one category has too few distinct meanings, use other terms as fallback.
+  if(distractors.length<3){
+    for(const x of shuf(all)) if(x!==a && !distractors.includes(x) && x.f!==a.f && x.m!==a.m){distractors.push(x);if(distractors.length===3)break;}
+  }
+  const opts=shuf([a,...distractors]);
+  const rev=Math.random()<.35;
+  $('#qb').className='q '+a.k.toUpperCase();
+  $('#qb').innerHTML=`<small>${NAME[a.k]}: ${rev?'which one means':'what does it mean?'}</small><div class="big">${esc(rev?a.m:a.f)}</div><div class="opts">${opts.map((o,i)=>`<button class="opt" type="button" data-i="${i}">${esc(rev?o.f:o.m)}</button>`).join('')}</div><div id="fd" aria-live="polite"></div>`;
+  $$('#qb .opt').forEach(b=>b.onclick=()=>{
+    if(b.disabled)return;
+    const chosen=opts[Number(b.dataset.i)];
+    const ok=chosen===a;
+    $$('#qb .opt').forEach((x,i)=>{x.disabled=true;if(opts[i]===a)x.classList.add('ok')});
+    if(ok)score++;else{wrong++;b.classList.add('no')}
+    $('#sc').textContent=score;$('#wc').textContent=wrong;
+    $('#fd').innerHTML=`<p class="fb2">${esc(a.f)} = ${esc(a.m)}. Example: <b>${esc(a.e||'—')}</b></p><button class="next" id="nx" type="button">Next</button>`;
+    $('#nx').onclick=nextQ;
+  });
+}
+</script></body></html>
