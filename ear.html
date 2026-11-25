@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ear: Parts, Functions, Terms and Codes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&family=Noto+Sans+Malayalam:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2f5f8; --ink:#14232f; --muted:#52646f; --card:#fff; --line:#d6dee5;
+  --outer:#1f6fd1; --middle:#8a3fc8; --inner:#1d9b55; --accent:var(--outer);
+  --hero:#102636; --hero-ink:#eaf2f8;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0c151d; --ink:#e6eef4; --muted:#98aab6; --card:#14222d; --line:#27394604; --line:#2a3b48; --hero:#08111a;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 Figtree,"Noto Sans Malayalam",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,sans-serif;line-height:1.1;margin:0}
+.hero{background:var(--hero);color:var(--hero-ink);padding:2.5rem 1.25rem 1.5rem}
+.wrap{max-width:1000px;margin:auto}
+.hero h1{font-size:clamp(2rem,6vw,3.6rem);font-weight:800;max-width:14ch}
+.hero p{max-width:52ch;color:#a9bcc9;margin:.8rem 0 1.2rem}
+.stage{background:#0b1a26;border:1px solid #1d3547;border-radius:18px;padding:.5rem;position:relative}
+svg{display:block;width:100%;height:auto}
+.zone{transition:opacity .4s}
+.dim .zone:not(.on){opacity:.28}
+.lbl{font:600 13px Figtree,sans-serif;fill:#cfe0ec}
+.controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem;align-items:center}
+button{font:600 1rem Figtree,"Noto Sans Malayalam",sans-serif;cursor:pointer;border-radius:999px;border:2px solid transparent;padding:.6rem 1.2rem;color:inherit;background:none}
+button:focus-visible{outline:3px solid #ffd35c;outline-offset:2px}
+.play{background:#ffd35c;color:#1a1400}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap}
+.tab{border-color:#2b4558;color:var(--hero-ink)}
+.tab[aria-selected=true]{color:#fff;border-color:transparent}
+.tab[data-k=outer][aria-selected=true]{background:var(--outer)}
+.tab[data-k=middle][aria-selected=true]{background:var(--middle)}
+.tab[data-k=inner][aria-selected=true]{background:var(--inner)}
+main{padding:2rem 1.25rem 3rem}
+.panel h2{font-size:clamp(1.7rem,4vw,2.4rem);color:var(--accent)}
+.sub{color:var(--muted);margin:.2rem 0 1.5rem}
+.grid{display:grid;gap:1.5rem;grid-template-columns:1fr 1fr}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:10px;padding:1.1rem 1.25rem}
+.box h3{font-size:1.2rem;margin-bottom:.6rem}
+.box ul{margin:0;padding-left:1.1rem}.box li{margin:.35rem 0}
+.full{grid-column:1/-1}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.95rem}
+th,td{text-align:left;padding:.55rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:"Bricolage Grotesque",sans-serif}
+td.ml{font-family:"Noto Sans Malayalam",sans-serif}
+td b{white-space:nowrap}
+.chip{display:inline-block;border-radius:6px;padding:.1rem .5rem;font-size:.8rem;font-weight:600;color:#fff;background:var(--accent)}
+code{font:600 1rem ui-monospace,Menlo,monospace}
+.fn{display:flex;gap:.7rem;margin:.55rem 0}.fn i{flex:none;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--accent);margin-top:.15rem}
+footer{padding:1.5rem 1.25rem 2.5rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+/* ---------- sound animation ---------- */
+.playing .wave{animation:travel 3s linear infinite}
+.playing .w2{animation-delay:.35s}.playing .w3{animation-delay:.7s}
+.wave{opacity:0}
+@keyframes travel{0%{transform:translateX(30px);opacity:0}10%{opacity:1}85%{opacity:1}100%{transform:translateX(385px);opacity:0}}
+.drum{transform-box:fill-box;transform-origin:center}
+.playing .drum{animation:drum .35s ease-in-out infinite alternate}
+@keyframes drum{from{transform:scaleX(1)}to{transform:scaleX(2.6) translateX(2px)}}
+.bone{transform-box:fill-box;transform-origin:center}
+.playing .bone{animation:rock .35s ease-in-out infinite alternate}
+@keyframes rock{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+.playing .pulse{animation:glow .7s ease-in-out infinite alternate}
+@keyframes glow{from{stroke-opacity:.6}to{stroke-opacity:1}}
+.playing .spark{animation:spark 1.2s linear infinite}
+@keyframes spark{from{stroke-dashoffset:0}to{stroke-dashoffset:-40}}
+.spark{stroke-dasharray:6 14}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.wave{opacity:.7}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="wrap">
+  <h1>How the ear hears and balances</h1>
+  <p>Tap Play to follow one sound from the air to the brain. Pick a part of the ear to see its functions, key terms (with Malayalam), common conditions and billing codes.</p>
+  <div class="stage" id="stage">
+    <svg viewBox="0 0 900 340" role="img" aria-label="Cross-section of the ear showing outer, middle and inner ear with a sound wave travelling through it">
+      <defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c1a6"/><stop offset="1" stop-color="#e49b7c"/></linearGradient></defs>
+
+      <g class="zone" data-z="outer">
+        <rect x="8" y="8" width="412" height="324" rx="16" fill="#1f6fd1" fill-opacity=".14"/>
+        <path d="M70 60C10 70 5 250 75 285C115 305 135 245 122 205L152 192V150L122 138C135 95 115 48 70 60Z" fill="url(#skin)"/>
+        <path d="M70 100C45 120 45 210 80 235" fill="none" stroke="#c9775a" stroke-width="4" stroke-linecap="round"/>
+        <rect x="150" y="148" width="270" height="46" fill="#d98b6c"/>
+        <rect x="150" y="160" width="270" height="22" fill="#a95f46"/>
+        <text class="lbl" x="22" y="322">Auricle (pinna)</text>
+        <text class="lbl" x="200" y="136">External auditory canal</text>
+        <text class="lbl" x="320" y="30" fill="#fff">Outer ear</text>
+        <g stroke="#6fb0ff" stroke-width="5" fill="none" stroke-linecap="round">
+          <path class="wave w1" d="M0 140Q14 171 0 202"/>
+          <path class="wave w2" d="M0 140Q14 171 0 202"/>
+          <path class="wave w3" d="M0 140Q14 171 0 202"/>
+        </g>
+      </g>
+
+      <g class="zone" data-z="middle">
+        <rect x="428" y="8" width="214" height="324" rx="16" fill="#8a3fc8" fill-opacity=".16"/>
+        <ellipse class="drum" cx="424" cy="171" rx="4" ry="36" fill="#9ec0ff"/>
+        <g class="bone" stroke="#e8b45a" stroke-width="5" stroke-linecap="round" fill="#f1c97a">
+          <line x1="452" y1="150" x2="500" y2="128"/><line x1="500" y1="128" x2="548" y2="158"/><line x1="428" y1="171" x2="452" y2="150"/>
+          <circle cx="452" cy="150" r="11"/><circle cx="500" cy="128" r="9"/><circle cx="548" cy="158" r="9"/>
+        </g>
+        <path d="M520 215L600 300" stroke="#e8b45a" stroke-opacity=".7" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <text class="lbl" x="440" y="116">Malleus</text>
+        <text class="lbl" x="488" y="104">Incus</text>
+        <text class="lbl" x="538" y="140">Stapes</text>
+        <text class="lbl" x="440" y="206">Eardrum</text>
+        <text class="lbl" x="500" y="318">Eustachian tube</text>
+        <text class="lbl" x="530" y="30" fill="#fff">Middle ear</text>
+      </g>
+
+      <g class="zone" data-z="inner">
+        <rect x="650" y="8" width="242" height="324" rx="16" fill="#1d9b55" fill-opacity=".16"/>
+        <g fill="none" stroke="#6fe0a0" stroke-width="9" stroke-linecap="round">
+          <ellipse cx="720" cy="86" rx="36" ry="28"/><ellipse cx="780" cy="70" rx="24" ry="38" transform="rotate(25 780 70)"/><ellipse cx="755" cy="105" rx="40" ry="14"/>
+        </g>
+        <path class="pulse" d="M790 215a10 10 0 0 1 10 10a24 24 0 0 1-24 24a40 40 0 0 1-40-40a58 58 0 0 1 58-58a74 74 0 0 1 74 74" fill="none" stroke="#c07bf2" stroke-width="15" stroke-linecap="round"/>
+        <path class="spark" d="M860 200C880 170 880 120 860 40" fill="none" stroke="#ffd35c" stroke-width="5" stroke-linecap="round"/>
+        <text class="lbl" x="660" y="156">Semicircular canals</text>
+        <text class="lbl" x="700" y="320">Cochlea</text>
+        <text class="lbl" x="800" y="30" fill="#fff">Inner ear</text>
+        <text class="lbl" x="800" y="52" fill="#ffd35c">to brain</text>
+      </g>
+    </svg>
+  </div>
+  <div class="controls">
+    <button class="play" id="play" aria-pressed="false">Play sound</button>
+    <div class="tabs" role="tablist" aria-label="Part of the ear">
+      <button class="tab" role="tab" data-k="outer" aria-selected="true">Outer ear</button>
+      <button class="tab" role="tab" data-k="middle" aria-selected="false">Middle ear</button>
+      <button class="tab" role="tab" data-k="inner" aria-selected="false">Inner ear</button>
+    </div>
+  </div>
+</div>
+</header>
+
+<main><div class="wrap" id="panel" role="tabpanel" aria-live="polite"></div></main>
+<footer><div class="wrap">For learning only, not medical advice. Check the Malayalam terms with a teacher or a medical dictionary. ICD-10-CM and CPT codes are listed as in the study sheet.</div></footer>
+
+<script>
+const D={
+outer:{title:"Outer ear",alt:"External ear",c:"--outer",
+ parts:["Auricle (pinna): the visible outer part","External auditory canal: the ear canal"],
+ fn:["Collects sound waves from the environment","Channels sound waves into the eardrum (tympanic membrane)","Protects the ear with hair and earwax","Helps keep the ear canal clean and dry (earwax or cerumen)"],
+ terms:[["Auricle (Pinna)","Outer visible part of the ear","ചെവിച്ചിറക് (പിന്ന)"],["External auditory canal","Tube from the outer ear to the eardrum","ചെവി കനാൽ"],["Cerumen","Ear wax","ചെവിയിലെ മെഴുക്"],["Otitis externa","Inflammation of the ear canal","പുറത്തെ ചെവിയുടെ വീക്കം (ഓട്ടൈറ്റിസ് എക്സ്റ്റേർണ)"]],
+ cond:["Otitis externa (outer ear infection)","Cerumen impaction (ear wax blockage)","Foreign body in ear","Trauma to auricle (ear injury)","Perichondritis (cartilage infection)"],
+ codes:[["ICD-10-CM","H60.0","Acute otitis externa"],["ICD-10-CM","H61.2","Impacted cerumen (ear wax)"],["ICD-10-CM","S01.31","Open wound of ear (auricle)"],["CPT","69210","Removal of impacted ear wax (cerumen)"]]},
+middle:{title:"Middle ear",alt:"Tympanic cavity",c:"--middle",
+ parts:["Tympanic membrane (eardrum)","Ossicles: malleus, incus, stapes","Eustachian tube (to the throat)"],
+ fn:["Receives sound vibrations from the eardrum","Amplifies vibrations using the ossicles (malleus, incus, stapes)","Transmits amplified sound to the inner ear (cochlea)","Equalizes air pressure with the outside through the Eustachian tube","Drains fluid from the middle ear to the throat"],
+ terms:[["Tympanic membrane","Eardrum: thin membrane that vibrates with sound","കർണ്ണപടം (ഇയർഡ്രം)"],["Malleus","Hammer-shaped bone","മാലിയസ് (ചുറ്റിക അസ്ഥി)"],["Incus","Anvil-shaped bone","ഇൻകസ് (ആൻവിൽ അസ്ഥി)"],["Stapes","Stirrup-shaped bone","സ്റ്റേപ്പിസ് (ചവിട്ടി അസ്ഥി)"],["Eustachian tube","Tube that equalizes pressure and drains fluid","യൂസ്റ്റേഷ്യൻ ട്യൂബ്"]],
+ cond:["Otitis media (middle ear infection)","Otitis media with effusion (fluid)","Tympanic membrane perforation (eardrum hole)","Eustachian tube dysfunction","Chronic suppurative otitis media"],
+ codes:[["ICD-10-CM","H66.0","Acute otitis media"],["ICD-10-CM","H66.3","Chronic suppurative otitis media"],["ICD-10-CM","H72.0","Perforation of tympanic membrane"],["CPT","69436","Myringotomy with tube insertion"]]},
+inner:{title:"Inner ear",alt:"Internal ear",c:"--inner",
+ parts:["Cochlea (hearing)","Vestibule (balance)","Semicircular canals (balance)","Vestibulocochlear nerve (CN VIII)"],
+ fn:["Hearing (audition): the cochlea converts sound vibrations to electrical nerve signals","Balance (equilibrium): detects head movement and body position via the vestibule and semicircular canals","Sends signals to the brain through the vestibulocochlear nerve (cranial nerve VIII)"],
+ terms:[["Cochlea","Hearing organ that converts sound to nerve signals","കോക്ലിയ (ശ്രവണ അവയവം)"],["Vestibule","Part that detects head position and movement","വെസ്റ്റിബ്യൂൾ (സന്തുലന അവയവം)"],["Semicircular canals","Three looped canals that detect rotational movement","അർദ്ധവൃത്താകാര നാളികകൾ"],["Vestibulocochlear nerve (CN VIII)","Nerve that carries hearing and balance signals to the brain","വെസ്റ്റിബുലോകോക്ലിയർ നാഡി (CN VIII)"]],
+ cond:["Sensorineural hearing loss","Meniere's disease (vertigo, hearing loss, tinnitus)","Labyrinthitis / vestibulitis (inner ear inflammation)","Vestibular neuritis (acute balance disorder)","BPPV (benign paroxysmal positional vertigo)"],
+ codes:[["ICD-10-CM","H81.0","Meniere's disease"],["ICD-10-CM","H81.1","Benign paroxysmal positional vertigo (BPPV)"],["ICD-10-CM","H90.3","Sensorineural hearing loss (bilateral)"],["CPT","69930","Cochlear implant insertion"]]}
+};
+const $=s=>document.querySelector(s),stage=$("#stage");
+function render(k){
+ const d=D[k],r=document.documentElement;
+ r.style.setProperty("--accent","var("+d.c+")");
+ $("#panel").innerHTML=`<section class="panel"><h2>${d.title}</h2><p class="sub">${d.alt}</p>
+ <div class="grid">
+  <div class="box"><h3>Includes</h3><ul>${d.parts.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  <div class="box"><h3>Functions</h3>${d.fn.map(x=>`<div class="fn"><i></i><span>${x}</span></div>`).join("")}</div>
+  <div class="box full"><h3>Key medical terminology</h3><div class="scroll"><table><thead><tr><th>Term</th><th>Meaning</th><th>Malayalam</th></tr></thead><tbody>${d.terms.map(t=>`<tr><td><b>${t[0]}</b></td><td>${t[1]}</td><td class="ml">${t[2]}</td></tr>`).join("")}</tbody></table></div></div>
+  <div class="box"><h3>Common conditions</h3><ul>${d.cond.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+  <div class="box"><h3>Coding examples</h3><div class="scroll"><table style="min-width:0"><tbody>${d.codes.map(c=>`<tr><td><span class="chip">${c[0]}</span></td><td><code>${c[1]}</code></td><td>${c[2]}</td></tr>`).join("")}</tbody></table></div></div>
+ </div></section>`;
+ document.querySelectorAll(".zone").forEach(z=>z.classList.toggle("on",z.dataset.z===k));
+ stage.classList.add("dim");
+ document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.dataset.k===k));
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>render(t.dataset.k));
+document.querySelectorAll(".zone").forEach(z=>z.onclick=()=>render(z.dataset.z));
+$("#play").onclick=e=>{const on=stage.classList.toggle("playing");e.target.textContent=on?"Stop sound":"Play sound";e.target.setAttribute("aria-pressed",on)};
+render("outer");
+</script>
+</body>
+</html>
